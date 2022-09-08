@@ -1,0 +1,96 @@
+html {
+    background-color: #7fffd4;
+    color: #414e8d;
+    font-size: 20px;
+}
+
+h1 {
+    color: #ff6600;
+    font-size: 60px;
+}
+
+h2 {
+    color: #e8650e;
+    font-size: 50px;
+}
+
+h3 {
+    color: #d2691e;
+    font-size: 20px;
+}
+
+label {
+    color: #e8910e;
+    font-size: 30px;
+    text-align: center;
+    vertical-align: center;
+}
+
+input {
+    width: 240px;
+    color: #414e8d;
+    font-size: 20px;
+    height: 30px;
+    vertical-align: center;
+    margin: 3px;
+    background: #54fff9;
+    border-color: aquamarine;
+}
+
+.write {
+    width: 400px;
+    height: 150px;
+    color: #414e8d;
+    background: #54fff9;
+    border-color: aquamarine;
+    font-size: 20px;
+}
+
+/*.file {*/
+/*    width: 400px;*/
+/*    height: 150px;*/
+/*    color: #eeb013;*/
+/*    background: #54fff9;*/
+/*    border-color: aquamarine;*/
+/*    font-size: 20px;*/
+/*}*/
+
+.file {
+    display: inline-block;
+    border-radius: 4px;
+    color: #414e8d;
+    background: aquamarine;
+    border-color: aquamarine;
+    font-size: 20px;
+    height: 35px;
+}
+
+
+div {
+    text-align: center;
+    vertical-align: center;
+}
+
+select {
+    font-size: 20px;
+    color: #eeb013;
+}
+
+p {
+    text-align: center;
+}
+
+input[type = "text"] {
+    width: 300px;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    display: none;
+}
+
+span {
+    color: #d74e06;
+    font-weight: bold;
+}

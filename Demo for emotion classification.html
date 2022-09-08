@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://localhost:8000/demo.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Demo for emotion classification</title>
+    <link rel="shortcut icon" href="./logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<script type="text/javascript" src="/eel.js"></script>
+<script type="text/javascript">
+
+    async function emotion(string) {
+        let para = document.querySelector('#result');
+        if (string !== '')
+            para.textContent = "wait for a moment";
+        para.textContent = await eel.main_html_string(string)();
+        let n = document.querySelector("img");
+        n.src = "./img/" + para.textContent + ".png";
+        n.style.display = "inline"
+    }
+</script>
+<h2 id="a">Text Emotion Prediction by Bert</h2>
+<h3 id="a1">Single Sentence Prediction</h3>
+<p style="text-align: left; font-size: 20px"> You can input your sentence in input bar and click submit button, then it
+    will output the prediction and its emoji. For example, If you input "I am anger", it will output "anger" and an
+    anger face.</p>
+<div>
+    <label>Your sentence:<br>
+        <input type="text" name="input_string" value="You did such a bad job!">
+    </label><br>
+
+    <input type="button" name="submit" onclick="emotion(document.getElementsByName(&#39;input_string&#39;)[0].value)" value="submit">
+    <p id="result">anger</p>
+    <img src="./anger.png" style="display: inline;">
+</div>
+<h3 id="a2">File Prediction</h3>
+<p style="text-align: left; font-size: 20px"> You can input the path of your text file like train.txt or text_data.txt
+    in input bar of file name, optionally input the position which you want to save the prediction if you want
+    (the type as test_prediction_sample.txt), choose your file having label or not, and click submit button. If it has
+    labels, you will get the accuracy. And then get all the sentences and their predictions in this page.
+    I prepare two file for quickly test, demoNolLabel.txt and demoWithLabel.txt.
+    For example, If you input "./data/demoNoLabel.txt" and "./demo_no_label_prediction.txt" as order, and choose
+    "Text without label", it will output predictions.</p>
+<div>
+    <label>The file name:<br>
+        <input type="text" name="file_name" value="./data/demoNoLabel.txt">
+    </label>
+    <br>
+    <label>The output file:<br>
+        <input type="text" name="file_store" value="None" style="text-align: center">
+    </label>
+    <br>
+    <label for="label">Is text file with label?</label><br>
+    <select id="label" name="label">
+        <option value="True">Text with label</option>
+        <option value="False">Text without label</option>
+    </select><br>
+    <input type="button" name="submit_file" onclick="emotion_final_file()" value="submit">
+    <p id="acc"></p>
+    <table id="prediction">
+        <tbody id="table_body"><tr><th>Text</th><th>Prediction</th></tr><tr><td>im feeling rather rotten so im not very ambitious right now
+</td><td>sadness</td></tr><tr><td>im updating my blog because i feel shitty
+</td><td>sadness</td></tr><tr><td>i never make her separate from me because i don t ever want her to feel like i m ashamed with her
+</td><td>sadness</td></tr><tr><td>i left with my bouquet of red and yellow tulips under my arm feeling slightly more optimistic than when i arrived
+</td><td>joy</td></tr><tr><td>i was feeling a little vain when i did this one
+</td><td>sadness</td></tr></tbody></table>
+</div>
+<script type="text/javascript">
+    const file_name1 = document.getElementsByName("file_name")[0]
+    let final_file_name = ""
+
+    function change_value_file1() {
+        final_file_name = file_name1.value
+    }
+
+    file_name1.addEventListener("change", change_value_file1)
+
+    async function emotion_final_file() {
+
+        let current_text;
+        let my_current_cell;
+        let file_store = document.getElementsByName("file_store")[0].value
+        if (file_store === "" || file_store === "None")
+            file_store = "None";
+        let table_body = document.querySelector("#table_body")
+        table_body.innerHTML = ""
+        document.querySelector("#acc").textContent = "wait a monument...";
+        let n = await eel.main_html_file(final_file_name, file_store, document.querySelector("#label").value)();
+        let k = n.split(";");
+        if (document.querySelector("#label").value === "True")
+            document.querySelector("#acc").textContent = "accuracy:" + k.pop();
+        else
+            document.querySelector("#acc").textContent = "";
+            k.pop()
+
+        my_current_row = document.createElement("TR")
+        my_current_cell = document.createElement("TH");
+        current_text = document.createTextNode("Text");
+        my_current_cell.appendChild(current_text);
+        my_current_row.appendChild(my_current_cell);
+        my_current_cell = document.createElement("TH");
+        current_text = document.createTextNode("Prediction");
+        my_current_cell.appendChild(current_text);
+        my_current_row.appendChild(my_current_cell);
+        table_body.appendChild(my_current_row)
+        for (j = 0; j < k.length; j++) {
+            var my_current_row = document.createElement("TR");
+            let temp = k[j].split(":")
+            for (i = 0; i < 2; i++) {
+                my_current_cell = document.createElement("TD");
+                current_text = document.createTextNode(temp[i]);
+                my_current_cell.appendChild(current_text);
+                my_current_row.appendChild(my_current_cell);
+            }
+            table_body.appendChild(my_current_row);
+        }
+
+    }
+</script>
+<p style="font-size: 5px">Presented by 21032002g JIANG Maiqi</p>
+
+</body></html>
