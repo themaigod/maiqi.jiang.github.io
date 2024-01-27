@@ -1,5 +1,5 @@
-# themaigod.github.io
-The personal website for JIANG Maiqi. It will give a brief introduction about me. View it at [themaigod.github.io](themaigod.github.io)
+# This website
+The personal website for JIANG Maiqi. It will give a brief introduction about me. View it at [themaigod.github.io](https://themaigod.github.io)
 
 
 
